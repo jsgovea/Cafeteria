@@ -1,4 +1,12 @@
 <?php
+session_start();
+if(!isset($_SESSION['nombre']))
+{
+     echo "<script>
+             alert('Sesión expirada');
+             window.location= 'login.php'
+           </script>";    
+}
   $self = $_SERVER['PHP_SELF'];
 header("refresh:30; url=$self"); 
 	require_once "php/conexion.php";
@@ -6,7 +14,7 @@ header("refresh:30; url=$self");
  
 
  
-					$sql="select max(folio) from kiosco where status=0  ";
+					$sql="select min(folio) from kiosco where status=0  ";
 
 				$result=mysqli_query($conexion,$sql);	
 				while($ver=mysqli_fetch_row($result)){ 
@@ -33,9 +41,14 @@ header("refresh:30; url=$self");
   <script src="librerias/select2/js/select2.js"></script>
 </head>
 <body>
-  
-	 
-
+<style>
+  .display-4{
+    text-align: center;
+  }
+</style>
+<?php
+        include("cabecera.php");
+    ?>
 <br>
   <div class="container">
    
@@ -57,7 +70,7 @@ header("refresh:30; url=$self");
       <div class="col-sm-8">
         <div class="jumbotron jumbotron-fluid">
           <div class="container">
-            <h1 class="display-4">Folio:<?php echo $datos; ?> </h1>
+            <h1 class="display-4">Folio: <?php echo $datos; ?> </h1>
             <h1 class="display-3" id="total"></h1>
           </div>
         </div>

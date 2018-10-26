@@ -1,5 +1,19 @@
 <?php 
-  session_start();
+ session_start();
+ if(!isset($_SESSION['nombre']))
+ {
+      echo "<script>
+              alert('Sesión expirada');
+              window.location= 'login.php'
+            </script>";    
+ }
+
+ if(($_SESSION['tipo'])!=1){
+	echo "<script>
+			    alert('Usuario sin permiso');
+			    window.history.back();
+		    </script>";
+ }
   unset($_SESSION['consulta']);
 
  ?>
@@ -21,7 +35,10 @@
   <script src="librerias/select2/js/select2.js"></script>
 </head>
 <body>
-
+<?php
+        include("cabecera.php");
+    ?>
+<br>
 	<div class="container">
     <div id="buscador"></div>
 		<div id="tabla"></div>
@@ -39,15 +56,15 @@
       </div>
       <div class="modal-body">
         	<label>id_cliente:</label>
-        	<input type="text" name="" id="id_cliente" class="form-control input-sm">
+        	<input type="text" name="" id="id_cliente" class="form-control input-sm" autocomplete="off">
         	<label>Nombre:</label>
-        	<input type="text" name="" id="nombre" class="form-control input-sm">
+        	<input type="text" name="" id="nombre" class="form-control input-sm" autocomplete="off">
         	<label>Ap.Paterno: </label>
-        	<input type="text" name="" id="ap_paterno" class="form-control input-sm">
+        	<input type="text" name="" id="ap_paterno" class="form-control input-sm" autocomplete="off">
         	<label>Ap.Materno: </label>
-        	<input type="text" name="" id="ap_materno" class="form-control input-sm">
+        	<input type="text" name="" id="ap_materno" class="form-control input-sm" autocomplete="off">
         	<label>Credito: </label>
-        	<input type="text" name="" id="credito" class="form-control input-sm">
+        	<input type="text" name="" id="credito" class="form-control input-sm" autocomplete="off">
 	                          </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-primary" data-dismiss="modal" id="guardarnuevo">
@@ -69,15 +86,15 @@
         <h4 class="modal-title" id="myModalLabel">Actualizar datos</h4>
       </div>
       <div class="modal-body">
-      		<input type="text"  id="idpersona" name="">
+      		<input type="hidden"  id="idpersona" name="">
  <label>Nombre</label>
-        	<input type="text" name="" id="nom" class="form-control input-sm">
+        	<input type="text" name="" id="nom" class="form-control input-sm" autocomplete="off">
         	<label>Ap. Paterno:</label>
-        	<input type="text" name="" id="ap" class="form-control input-sm">
+        	<input type="text" name="" id="ap" class="form-control input-sm" autocomplete="off">
         	<label>Ap. Materno</label>
-        	<input type="text" name="" id="am" class="form-control input-sm">
+        	<input type="text" name="" id="am" class="form-control input-sm" autocomplete="off">
         	<label>Credito</label>
-        	<input type="text" name="" id="cre" class="form-control input-sm">
+        	<input type="text" name="" id="cre" class="form-control input-sm" autocomplete="off">
         	
              </div>
       <div class="modal-footer">

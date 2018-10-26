@@ -1,5 +1,19 @@
 <?php 
-  session_start();
+   session_start();
+   if(!isset($_SESSION['nombre']))
+   {
+        echo "<script>
+                alert('Sesión expirada');
+                window.location= 'login.php'
+              </script>";    
+   }
+  
+   if(($_SESSION['tipo'])!=1){
+    echo "<script>
+        alert('Usuario sin permiso');
+        window.history.back();
+        </script>";
+   }
   unset($_SESSION['consulta']);
 
  ?>
@@ -42,11 +56,11 @@
       </div>
       <div class="modal-body">
         	<label>IDPlatillo:</label>
-        	<input type="text" name="" id="idpersona" class="form-control input-sm">
+        	<input type="text" name="" id="idpersona" class="form-control input-sm" autocomplete="off">
         	<label>Descripcion:</label>
-        	<input type="text" name="" id="des" class="form-control input-sm">
+        	<input type="text" name="" id="des" class="form-control input-sm" autocomplete="off">
         	<label>Precio: </label>
-        	<input type="text" name="" id="pre" class="form-control input-sm">
+        	<input type="text" name="" id="pre" class="form-control input-sm" autocomplete="off">
 	                          </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-primary" data-dismiss="modal" id="guardarnuevo">
@@ -67,11 +81,11 @@
         <h4 class="modal-title" id="myModalLabel">Actualizar datos</h4>
       </div>
       <div class="modal-body">
-      		<input type="text"  id="idpersona" name="">
+      		<input type="text"  id="idper" name="" hidden="">
  <label>Descripcion</label>
-        	<input type="text" name="" id="des" class="form-control input-sm">
+        	<input type="text" name="" id="descr" class="form-control input-sm" autocomplete="off">
         	<label>Precio</label>
-        	<input type="text" name="" id="pre" class="form-control input-sm">
+        	<input type="text" name="" id="prec" class="form-control input-sm" autocomplete="off">
         	 
              </div>
       <div class="modal-footer">

@@ -1,4 +1,20 @@
+<?php
+ session_start();
+ if(!isset($_SESSION['nombre']))
+ {
+      echo "<script>
+              alert('Sesión expirada');
+              window.location= 'login.php'
+            </script>";    
+ }
 
+ if(($_SESSION['tipo'])!=1){
+	echo "<script>
+			    alert('Usuario sin permiso');
+			    window.history.back();
+		  </script>";
+ }
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -37,18 +53,22 @@
       </div>
       <div class="modal-body">
         	<label>Nombre</label>
-        	<input type="text" name="" id="nombre" class="form-control input-sm">
-        	<label>Ap</label>
-        	<input type="text" name="" id="apellido" class="form-control input-sm">
-        	<label>Am</label>
-        	<input type="text" name="" id="apellido2" class="form-control input-sm">
-        	<label>UserName</label>
-        	<input type="text" name="" id="usuario" class="form-control input-sm">
-	<label>Password</label>
-        	<input type="text" name="" id="pass" class="form-control input-sm">
-	<label>Tipo_User</label>
-        	<input type="text" name="" id="tipo" class="form-control input-sm">
+        	<input type="text" name="" id="nombre" class="form-control input-sm" autocomplete="off">
+        	<label>Apellido paterno</label>
+        	<input type="text" name="" id="apellido" class="form-control input-sm" autocomplete="off">
+        	<label>Apellido materno</label>
+        	<input type="text" name="" id="apellido2" class="form-control input-sm" autocomplete="off">
+        	<label>Usuario</label>
+        	<input type="text" name="" id="usuario" class="form-control input-sm" autocomplete="off">
+	<label>Contraseña</label>
+        	<input type="text" name="" id="pass" class="form-control input-sm" autocomplete="off">
 
+
+      <label for="tipo">Tipo de usuario:</label>
+      <select class="form-control" id="tipo">
+        <option value="0">Cajero</option>
+        <option value="1">Administrador</option>
+      </select>
       
             
                         </div>
@@ -74,18 +94,20 @@
       <div class="modal-body">
       		<input type="text" hidden="" id="idpersona" name="">
  <label>Nombre</label>
-        	<input type="text" name="" id="nombreM" class="form-control input-sm">
-        	<label>Ap</label>
-        	<input type="text" name="" id="apellidoM" class="form-control input-sm">
-        	<label>Am</label>
-        	<input type="text" name="" id="apellido2M" class="form-control input-sm">
-        	<label>UserName</label>
-        	<input type="text" name="" id="usuarioM" class="form-control input-sm">
-	<label>Password</label>
-        	<input type="text" name="" id="passM" class="form-control input-sm">
-	<label>Tipo_User</label>
-        	<input type="text" name="" id="tipoM" class="form-control input-sm">
-
+        	<input type="text" name="" id="nombreM" class="form-control input-sm" autocomplete="off">
+        	<label>Apellido paterno</label>
+        	<input type="text" name="" id="apellidoM" class="form-control input-sm" autocomplete="off">
+        	<label>Apellido materno</label>
+        	<input type="text" name="" id="apellido2M" class="form-control input-sm" autocomplete="off">
+        	<label>Usuario</label>
+        	<input type="text" name="" id="usuarioM" class="form-control input-sm" autocomplete="off">
+	<label>Contraseña</label>
+        	<input type="text" name="" id="passM" class="form-control input-sm" autocomplete="off">
+          <label for="tipoM">Tipo de usuario:</label>
+      <select class="form-control" id="tipoM">
+        <option value="0">Cajero</option>
+        <option value="1">Administrador</option>
+      </select>
              </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-warning" id="actualizadatos" data-dismiss="modal">Actualizar</button>

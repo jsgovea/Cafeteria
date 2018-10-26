@@ -1,0 +1,20 @@
+<?php 
+	$codproveedor=$_POST[codproveedor];
+	$facturar=$_POST[facturar];
+	$fechaentrega=$_POST[nombre_de_la_caja];
+	$codproducto=$_POST[codproducto];
+	$cantidad=$_POST[cantidad]; 	
+	$iva=$_POST[iva]; 
+		$autorizo=$_POST[autoriza]; 
+	
+	   if ($facturar=="OMAS")
+	   {
+	   $entregar="DISTRIBUIDORA OMAS S.A. DE C.V.";
+	   
+	   }
+	   else{
+	   $entregar="MERRY TECH INTERNATIONAL S.A. DE C.V.";
+	   }	   	  
+	    
+	   	     
+?>

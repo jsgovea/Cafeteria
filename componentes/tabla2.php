@@ -7,23 +7,23 @@
  ?><h2><?php echo "Bienvenido: "; echo $_SESSION['nombre']; echo " "; echo $_SESSION['ap'];?></h2>
 <div class="row">
 	<div class="col-sm-12">
-	<h2>Control inventario</h2>
-		<table class="table table-hover table-condensed table-bordered">
+	<h2>Control de inventario</h2>
+		<table class="table">
 		<caption>
 			<button class="btn btn-primary" data-toggle="modal" data-target="#modalNuevo">
 				Agregar nuevo 
 				<span class="glyphicon glyphicon-plus"></span>
 			</button>
 		</caption>
-			<tr>
-				<td>ID</td>
-				
-				<td>Descripcion</td>
-				<td>Cantidad</td>
-				<td>Precio_unitario</td>
-				<td>EDITAR</td>
-				<td>ELIMINAR</td>
-			</tr>
+			<thead class="thead-light">
+					<th>ID</th>
+					<th>Descripcion</th>
+					<th>Cantidad</th>
+					<th>Precio unitario</th>
+					<th>Editar</th>
+					<th>Eliminar</th>
+			</thead>
+
 
 			<?php 
 

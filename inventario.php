@@ -1,5 +1,19 @@
 <?php 
-  session_start();
+   session_start();
+   if(!isset($_SESSION['nombre']))
+   {
+        echo "<script>
+                alert('Sesión expirada');
+                window.location= 'login.php'
+              </script>";    
+   }
+  
+   if(($_SESSION['tipo'])!=1){
+    echo "<script>
+        alert('Usuario sin permiso');
+        window.history.back();
+        </script>";
+   }
   unset($_SESSION['consulta']);
 
  ?>
@@ -42,13 +56,13 @@
       </div>
       <div class="modal-body">
         	<label>id_articulo</label>
-        	<input type="text" name="" id="id_articulo" class="form-control input-sm">
+        	<input type="text" name="" id="id_articulo" class="form-control input-sm" autocomplete="off">
         	<label>descripcion</label>
-        	<input type="text" name="" id="descripcion" class="form-control input-sm">
+        	<input type="text" name="" id="descripcion" class="form-control input-sm" autocomplete="off">
         	<label>cantidad </label>
-        	<input type="text" name="" id="cantidad" class="form-control input-sm">
+        	<input type="text" name="" id="cantidad" class="form-control input-sm" autocomplete="off">
         	<label>precio_unitario</label>
-        	<input type="text" name="" id="precio_unitario" class="form-control input-sm">
+        	<input type="text" name="" id="precio_unitario" class="form-control input-sm" autocomplete="off">
 	                          </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-primary" data-dismiss="modal" id="guardarnuevo">
@@ -70,13 +84,13 @@
         <h4 class="modal-title" id="myModalLabel">Actualizar datos</h4>
       </div>
       <div class="modal-body">
-      		<input type="text"  id="idpersona" name="">
+      		<input type="text"  id="idpersona" name="" hidden="">
  <label>Descripcion</label>
-        	<input type="text" name="" id="des" class="form-control input-sm">
+        	<input type="text" name="" id="des" class="form-control input-sm" autocomplete="off">
         	<label>Cantidad</label>
-        	<input type="text" name="" id="cant" class="form-control input-sm">
+        	<input type="text" name="" id="cant" class="form-control input-sm" autocomplete="off">
         	<label>Precio Unitario</label>
-        	<input type="text" name="" id="pu" class="form-control input-sm">
+        	<input type="text" name="" id="pu" class="form-control input-sm" autocomplete="off">
         	
              </div>
       <div class="modal-footer">

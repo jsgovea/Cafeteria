@@ -1,5 +1,12 @@
 <?php
  session_start();
+ if(!isset($_SESSION['nombre']))
+ {
+      echo "<script>
+              alert('Sesión expirada');
+              window.location= 'login.php'
+            </script>";    
+ }
 	require_once "php/conexion.php";
 	$conexion=conexion();
  $idcajero=$_SESSION['id'];
@@ -39,13 +46,13 @@ $codigocliente=$_GET['c'];
         include("cabecera.php");
     ?>
 <br>
-<h2><?php echo "Cajero: "; echo $_SESSION['nombre']; echo " "; echo $_SESSION['ap'];?></h2>
   <div class="container">
+<h2><?php echo "Cajero: "; echo $_SESSION['nombre']; echo " "; echo $_SESSION['ap'];?></h2>
    
    
     <div class="row">
       <div class="col-sm-4">
-        <form  name="procesapago" action="php/procesa_cobro_cliente.php"  method="post" autocomplete="off" onKeyPress="return anular(event)" >
+        <form  name="procesapago" action="php/procesa_cobro_cliente_admi.php"  method="post" autocomplete="off" onKeyPress="return anular(event)" >
       
           <div class="form-group">
             <label for="codigoBarras">Codigo de cliente</label>
@@ -54,9 +61,7 @@ $codigocliente=$_GET['c'];
           <input type="submit" class="btn btn-secondary btn-lg btn-block" value="Consultar" ></form>
           
           <form  name="procesapago2" action="cobroclientes.php?idcliente=<?php echo $codigocliente2; ?>"  method="post" autocomplete="off" onKeyPress="return anular(event)" >
-      
-          <input type="submit" class="btn btn-secondary btn-lg btn-block" value="Re-Calcular" ></form>
-          
+      <br>    
            <form  name="procesapago" action="cobroclientes.php?id=<?php echo $codigocliente2;?>" method="post" autocomplete="off" onKeyPress="return anular(event)" >
       
           <button id="btnImprimir" type="submit" class="btn btn-danger btn-lg btn-block" >Realizar cobro</button></a>
@@ -65,7 +70,7 @@ $codigocliente=$_GET['c'];
       <div class="col-sm-8">
         <div class="jumbotron jumbotron-fluid">
           <div class="container">
-            <h1 class="display-4">Total a pagar:<?php if($flag==0){}else {echo $_GET['c']; }?></h1>
+            <h1 class="display-4">Total a pagar: $<?php if($flag==0){}else {echo $_GET['c']; }?></h1>
             <h1 class="display-3" id="total"></h1>
           </div>
         </div>

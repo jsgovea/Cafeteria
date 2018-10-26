@@ -8,7 +8,7 @@ require('../fpdf.php');
 
 class PDF extends FPDF
 {
-// Cabecera de página
+// Cabecera de pï¿½gina
 function Header()
 {
 	$fecha=date("Y-m-d ");
@@ -24,9 +24,9 @@ function Header()
 	$this->Ln(20);
 
 	$this->Cell(80);
-	// Título
+	// Tï¿½tulo
 	$this->Cell(60,10,'REPORTE DE VENTAS EN GENERAL',0,0,'C');
-	// Salto de línea
+	// Salto de lï¿½nea
 	 
  
 
@@ -44,28 +44,28 @@ function Header()
 	$this->Ln(10);
 	$this->Cell(10);
 	$this->Cell(12,5,'Venta',1,0,"C",1); 
-	$this->Cell(12,5,'Cajero',1,0,"C",1); 
-	$this->Cell(35,5,'Articulo#',1,0,"L",1);
-	$this->Cell(43,5,'Descripcion',1,0,"L",1);
-	$this->Cell(23,5,'Cantidad',1,0,"L",1);
-	$this->Cell(15,5,'P/U',1,0,"L",1);
-	$this->Cell(18,5,'Total',1,0,"L",1);
-	$this->Cell(30,5,'Descripcion',1,0,"L",1);
+	$this->Cell(15,5,'Cajero',1,0,"C",1); 
+	$this->Cell(15,5,'Cliente',1,0,"L",1);
+	$this->Cell(25,5,'Codigo',1,0,"L",1);
+	$this->Cell(37,5,'Descripcion',1,0,"L",1);
+	$this->Cell(20,5,'Cantidad',1,0,"L",1);
+	$this->Cell(18,5,'P/U',1,0,"L",1);
+	$this->Cell(34,5,'Total',1,0,"L",1);
  	$this->Ln(5);	
 	
 }
 
-// Pie de página
+// Pie de pï¿½gina
 function Footer()
 {
-	// Posición: a 1,5 cm del final
+	// Posiciï¿½n: a 1,5 cm del final
 	$this->SetY(-35);
 	// Arial italic 8
 	$this->SetFont('Arial','I',8);
 	
 	
 	 
-	// Número de página
+	// Nï¿½mero de pï¿½gina
 	$this->Cell(0,10,'Page '.$this->PageNo().'/{nb}',0,0,'C');
 }
 }
@@ -85,7 +85,7 @@ $sql1="select sum(total) from ventas where date(fecha) >='".$fecha1."' and date(
 	 $total1=$ver3[0];
  }
 
-// Creación del objeto de la clase heredada
+// Creaciï¿½n del objeto de la clase heredada
 $pdf = new PDF('P','mm','letter');
 $pdf->AliasNbPages();
 $pdf->AddPage();
@@ -129,11 +129,11 @@ while($ver2=mysqli_fetch_row($result2)){
 					
 	$pdf->Cell(15,5,$id_cajero,0,0,'',True);	
 			$pdf->SetFont('Arial','',8);				
-			$pdf->Cell(30,5,$id_producto,0,0,'',True);
+			$pdf->Cell(13,5,$id_producto,0,0,'',True);
 			$pdf->SetFont('Arial','',8);			
-			$pdf->Cell(45,5,$descripcion,0,0,'',True);	
+			$pdf->Cell(24,5,$descripcion,0,0,'',True);	
 			$pdf->SetFont('Arial','',8);			
-			$pdf->Cell(20,5,$cantidad,0,0,'',True);	
+			$pdf->Cell(44,5,$cantidad,0,0,'',True);	
 			
 			$pdf->SetFont('Arial','',8);			
 			$pdf->Cell(15,5,$pu,0,0,'',True);	
@@ -149,7 +149,7 @@ $pdf->Ln(10);
 $pdf->Cell(120	);
 $pdf->SetFont('Arial','B',16);			
 			$pdf->Cell(25,5,'TOTAL:',0,0,'',0);
-$pdf->Cell(20,5,$total1,0,0,'',0);
+$pdf->Cell(25,5,$total1,0,0,'',0);
 $pdf->Cell(5,5,'M.N.',0,0,'',0);
 
 

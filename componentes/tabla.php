@@ -11,25 +11,25 @@
 
 	
 	<h2>Control de Usuarios</h2>
-		<table class="table table-hover table-condensed table-bordered">
+		<table class="table">
 		<caption>
 			<button class="btn btn-primary" data-toggle="modal" data-target="#modalNuevo">
 				Agregar nuevo 
 				<span class="glyphicon glyphicon-plus"></span>
 			</button>
 		</caption>
-			<tr>
-				<td>ID</td>
-				
-				<td>Nombre</td>
-				<td>AP</td>
-				<td>AM</td>
-				<td>USER</td>
-				<td>PASS</td>
-				<td>TIPO</td>
-				<td>EDITAR</td>
-				<td>ELIMINAR</td>
-			</tr>
+		<thead class="thead-light">
+			<th>ID</th>
+				<th>Nombre</th>
+				<th>Apellido paterno</th>
+				<th>Apellido materno</th>
+				<th>Usuario</th>
+				<th>Contraseña</th>
+				<th>Tipo de usuario</th>
+				<th>Editar</th>
+				<th>Eliminar</th>
+			
+		</thead>
 
 			<?php 
 
@@ -63,7 +63,16 @@
 				<td><?php echo $ver[3] ?></td>
 				<td><?php echo $ver[4] ?></td>
                 <td><?php echo $ver[5] ?></td>
-                <td><?php echo $ver[6] ?></td>
+                <td>
+					<?php 
+						if($ver[6]==1){
+							echo "Administrador";
+						} 
+						else {
+							echo "Cajero";
+						} 
+					?>
+				</td>
 
 				<td>
 					<button class="btn btn-warning glyphicon glyphicon-pencil" data-toggle="modal" data-target="#modalEdicion" onclick="agregaform('<?php echo $datos ?>')">

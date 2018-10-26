@@ -13,7 +13,6 @@
       <!-- Tabs Titles 
       <h2 class="active"> Sign In </h2>
       <h2 class="inactive underlineHover">Sign Up </h2>
-      kalsdaskdsad
   -->
       <!-- Icon -->
       <div class="fadeIn first">
@@ -21,8 +20,8 @@
       </div>
 
       <!-- Login Form -->
-      <form action="validar_usuario.php" method="GET">
-        <input type="text" id="login" class="fadeIn second" name="usuario" placeholder="Usuario">
+      <form action="validar_usuario.php" method="POST">
+        <input type="text" id="login" class="fadeIn second" name="usuario" placeholder="Usuario" autocomplete="off">
         <input type="password" id="password" class="fadeIn third" name="password" placeholder="Contraseña">
         <input type="submit" class="fadeIn fourth" value="Ingresar">
       </form>

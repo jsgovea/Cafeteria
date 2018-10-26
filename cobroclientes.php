@@ -3,8 +3,8 @@ session_start();
 	require_once "php/conexion.php";
 	$conexion=conexion();
 
-echo $idcajero=$_SESSION['id'];
- echo $id_cliente2=$_GET['id'];
+$idcajero=$_SESSION['id'];
+ $id_cliente2=$_GET['id'];
 
 	 
 $sql3="select * from clientes where id_cliente=$id_cliente2";
@@ -15,7 +15,7 @@ $nombre=$ver3[1];
 $am=$ver3[3];
 }
 
-echo $nombre_cliente=$nombre." ".$ap." ".$am;
+ $nombre_cliente=$nombre." ".$ap." ".$am;
 
 
 $sql2="select sum(total) from ventas where id_cliente=$id_cliente2 and status=0 and Eliminada=0";
@@ -44,7 +44,10 @@ require_once "Tickets/ticket2.php";
  
 
     
-	 
+	 echo "<script>
+                alert('Cobro con exito!!!');
+                window.location= 'pago_clientes.php?id=0'
+    </script>";
 
 	
  ?>

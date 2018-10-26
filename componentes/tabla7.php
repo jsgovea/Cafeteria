@@ -7,25 +7,23 @@
  ?><h2><?php echo "Bienvenido: "; echo $_SESSION['nombre']; echo " "; echo $_SESSION['ap'];?></h2>
 <div class="row">
 	<div class="col-sm-12">
-	<h2>Control inventario</h2>
-		<table class="table table-hover table-condensed table-bordered">
+	<h2>Control de clientes</h2>
+		<table class="table">
 		<caption>
 			<button class="btn btn-primary" data-toggle="modal" data-target="#modalNuevo">
 				Agregar nuevo 
 				<span class="glyphicon glyphicon-plus"></span>
 			</button>
 		</caption>
-			<tr>
-				<td>ID_Cliente</td>
-				
-				<td>Nombre</td>
-				<td>Ap. Paterno</td>
-				<td>Am. Materno</td>
-				<td>Credito</td>
-				<td>EDITAR</td>
-				<td>ELIMINAR</td>
-			</tr>
-
+			<thead class="thead-light">
+					<th>ID</th>
+					<th>Nombre</th>
+					<th>Apellido paterno</th>
+					<th>Apellido materno</th>
+					<th>Credito</th>
+					<th>Editar</th>
+					<th>Eliminar</th>
+			</thead>
 			<?php 
 
 				if(isset($_SESSION['consulta'])){

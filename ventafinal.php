@@ -30,7 +30,7 @@ if($consumo>$credito and $id_cliente2!=0)
 	       
  echo "<script>
                 alert('Excede El Credito!!!');
-                window.location= 'caja.php?id=$id_cliente2'
+                window.location= 'caja_admin.php?id=$id_cliente2'
     </script>";
 
 }
@@ -88,7 +88,7 @@ if($ejecucion=mysqli_query($conexion,$insercion)){
         
  echo "<script>
                 alert('Pago efectuado');
-                window.location= 'caja.php?id=0'
+                window.location= 'caja_admin.php?id=0'
     </script>";
 
         }else{

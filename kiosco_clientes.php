@@ -1,6 +1,4 @@
 <?php
-  $self = $_SERVER['PHP_SELF'];
-header("refresh:30; url=$self"); 
 	require_once "php/conexion.php";
 	$conexion=conexion();
 ?>
@@ -13,6 +11,7 @@ header("refresh:30; url=$self");
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
     <link rel="stylesheet" type="text/css" href="librerias/bootstrap/css/bootstrap.css">
+    <script src="librerias/jquery-3.2.1.min.js"></script>
 </head>
 <body>
 
@@ -28,110 +27,71 @@ header("refresh:30; url=$self");
             <source src="videos/Cesun Universidad   Video Institucional[1].mp4" type="video/mp4">
         </video>
     </div>
-    <?php
-        $primerFolio="select distinct folio from kiosco where status=0 order by folio asc limit 1;";
-        $resultFolio=mysqli_query($conexion,$primerFolio);
+    <footer>
+        <p>Por favor, espere su turno.</p>
+    </footer>
 
-        $sql="select distinct folio from kiosco where status=0 order by folio asc limit 1,4;";
-        $result=mysqli_query($conexion,$sql);
-
-
-?>
-    <table class="tabla">
-        <thead>
-            <tr>
-                <th scope="col">FOLIO</th>
-            </tr>
-        </thead>
-        <tbody>
-        <?php  while($ver=mysqli_fetch_row($resultFolio)){ 
-          echo "<tr><th  class='primerFolio' scope='row'> $ver[0] </th></tr>";
-        }
-        ?>
-      <?php  while($ver2=mysqli_fetch_row($result)){ 
-          echo "<tr><th scope='row'> $ver2[0] </th></tr>";
-        ?>
-        </tbody>
-        <?php 
-      }
-        ?>
-    </table>
-    
+    <div id="tabla"></div>
 </body>
+<script type="text/javascript">
+	
+    $(document).ready(function(){
+		$('#tabla').load('componentes/tablakiosco.php');
+
+        setTimeout(function(){
+            $( "#tabla" ).load( "kiosco_clientes.php" );
+        }, 10000);
+	});
+
+</script>
+
 <style>
 
     .cabecera {
         padding: 1em;
-        height: 7.6em;
+        width: 95%;
+        height: 15%;
         box-shadow: 0 1px 2px black;
         background-color: rgb(131, 152, 61);
+        z-index: 0;
+        position: fixed;
+        top: 0;
     }
 
-    h1{
-        position: relative;
-        bottom: 95%;
-        right: 10%;
-        text-align: center;
-        color: white;
+    .cabecera h1{
+        position: fixed;
+        top: 2%;
+        left: 30%;
         font-size: 4em;
         font-weight: bold;
+        color: white;
+    }
+
+    body{
+        background-color: black;
+        overflow-x: hidden;
+        overflow-y: hidden;
+    }
+
+    footer{
+        color: white;
+        position: fixed;
+        bottom: 0;
+        width: 95%;
+        z-index: 1;
+    }
+
+    footer p{
+        font-size: 3em;
+        position: relative;
+        left: 22%;
     }
 
     video{
         width: 77%;
-    }
-
-    .tabla{
         position: fixed;
-        width: 23%;
-        top: 0;
-        bottom: 0;
-        right: 0;
-    }
-
-    thead th{
-        background: black;
-        color: white;
-        height: 1.9em;
-        box-shadow: 0 1px 2px black;
-    }
-
-    th{
-        background: white;
-        text-align: center;
-        font-size: 4em;
-        border-bottom: 1px solid #ddd;
-        margin-bottom: 0.5em;
-    }
-
-    tbody th{
-        padding-top: 5.5%;
-        padding-bottom: 5.5%;
-        background: white;
-        text-align: center;
-        font-size: 5em;
-    }
-
-    .primerFolio{
-        width: 100px;
-        height: 100px;
-        background-color: yellow;
-        -webkit-animation-name: example;
-        -webkit-animation-duration: 4s;
-        animation-name: example;
-        animation-duration: 4s;
-        animation-iteration-count: infinite;
-    }
-
-    @-webkit-keyframes example {
-        from {background-color: yellow;}
-        to {background-color: orange;}
-    }
-
-    @keyframes example {
-        from {background-color: yellow;}
-        to {background-color: orange;}
+        top: 15%;
+        z-index: -2;
     }
 </style>
-
 </html>

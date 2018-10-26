@@ -24,21 +24,19 @@ function agregardatos(idpersona,descripcion,precio){
 }
 
 function agregaform(datos){
-
 	d=datos.split('||');
-
-	$('#idpersona').val(d[0]);
-	$('#des').val(d[1]);
-	$('#pre').val(d[2]);
+	$('#idper').val(d[0]);
+	$('#descr').val(d[1]);
+	$('#prec').val(d[2]);
 	
 }
 
 function actualizaDatos(){
-	id=$('#idpersona').val();
-	descripcion=$('#des').val();
-	precio=$('#pre').val();
+	idpersona=$('#idper').val();
+	descripcion=$('#descr').val();
+	precio=$('#prec').val();
 	
-	cadena= "id=" + id +
+	cadena= "idper=" + idpersona +
 			"&descripcion=" + descripcion + 
 			"&precio=" + precio ;
 

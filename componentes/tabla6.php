@@ -15,14 +15,14 @@
 </div>
 
  <html>
- 	<form name="formulario" method="post" action="../fpdf/tutorial/rpt_general.php">
+ 	<form name="formulario" method="post" action="fpdf/tutorial/rpt_general.php">
  	<div class="col-sm-4">
   <!-- Campo de entrada de fecha -->
   <font size="4"  >
   <table width="1285" border="0" >
     <tbody>
       <tr>
-        <td width="264" rowspan="3"><img src="../img/reportes.png" width="264" height="215" alt=""/></td>
+        <td width="264" rowspan="3"><img src="img/reportes.png" width="264" height="215" alt=""/></td>
         <td width="41" >&nbsp;</td>
         <td width="150" >Fecha inicial:</td>
         <td colspan="3"><input type="date" name="fecha1" id="fecha1"></td>

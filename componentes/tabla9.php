@@ -8,21 +8,20 @@
  ?>
 <div class="row">
 	<div class="col-sm-12">
-		<table class="table table-hover table-condensed table-bordered">
+		<table class="table">
 		<caption>
 			 
 		</caption>
-			<tr>
-				<td>Folio</td>
-				<td>Descripcion</td>
-				<td>Cantidad</td>
-				<td>Nota</td>
-				<td>Terminado</td>
-			</tr>
-
+			<thead class="thead-light">
+					<th>Folio</th>
+					<th>Descripcion</th>
+					<th>Cantidad</th>
+					<th>Nota</th>
+					<th>Terminado</th>
+			</thead>
 			<?php 
 
-			$sql2="select max(folio) from kiosco where status=0";
+			$sql2="select min(folio) from kiosco where status=0";
 
 				$result2=mysqli_query($conexion,$sql2);	
 				while($ver=mysqli_fetch_row($result2)){ 

@@ -35,7 +35,7 @@ echo "/".$consumo."/";
 
 if($result5){ 
 	   echo "<script>
-                 window.location= '../pago_clientes.php?c=$consumo&codigo=$codigocliente&id=1'
+                 window.location= '../pago_clientesCajero.php?c=$consumo&codigo=$codigocliente&id=1'
                 </script>";
 	   
 }
@@ -43,7 +43,7 @@ if($result5){
    else {
        echo "<script>
                 alert('VERIFIQUE SUS DATOS ERROR');
-                window.location= '../pago_clientes.php'
+                window.location= '../pago_clientesCajero.php'
     </script>";
    
 echo  "Problemas en la query:" . mysqli_error($con);

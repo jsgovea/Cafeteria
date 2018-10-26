@@ -9,22 +9,18 @@
  ?>
 <div class="row">
 	<div class="col-sm-12">
-		<table class="table table-hover table-condensed table-bordered">
+		<table class="table">
 		<caption>
 			 
 		</caption>
-			<tr>
-				 
-				<td>Folio</td>
-				
-				<td>Descripcion</td>
-				<td>Cantidad</td>
-				<td>Precio_Unitario</td>
-				<td>Total</td>
-				 
-				<td>Eliminar</td>
-			</tr>
-
+			<thead class="thead-light">
+					<th>Cliente</th>
+					<th>Folio</th>
+					<th>Descripcion</th>
+					<th>Cantidad</th>
+					<th>Precio Unitario</th>
+					<th>Total</th>
+			</thead>
 			<?php 
 
 					$sql="select * from ventas where id_cliente='".$codigocliente."' and Eliminada=0 and status=0" ;
@@ -42,20 +38,15 @@
 					      
 			 ?>
 
-			<tr>
+			<tr><td><?php echo $codigocliente?></td>
 				<td><?php echo $ver[0] ?></td>
+				
 				<td><?php echo $ver[4] ?></td>
 				<td><?php echo $ver[5] ?></td>
 				<td><?php echo $ver[6] ?></td>
 				<td><?php echo $ver[7] ?></td>
 				
- 
-				<td>
-					<button class="btn btn-danger glyphicon glyphicon-remove" 
-					onclick="preguntarSiNo('<?php echo $ver[0] ?>')">
-						
-					</button>
-				</td>
+  
 			</tr>
 			<?php 
 		}

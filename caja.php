@@ -1,5 +1,12 @@
 <?php
  session_start();
+ if(!isset($_SESSION['nombre']))
+ {
+      echo "<script>
+              alert('Sesión expirada');
+              window.location= 'login.php'
+            </script>";    
+ }
 	require_once "php/conexion.php";
 	$conexion=conexion();
  $idcajero=$_SESSION['id'];
@@ -40,7 +47,7 @@ $cliente=$_GET['id'];
 </style>
 <body>
 <?php
-        include("cabecera.php");
+        include("cabeceraCajero.php");
     ?>
 <br>
   <div class="container">
@@ -70,7 +77,7 @@ $cliente=$_GET['id'];
             <input type="text" class="form-control" name="cliente" id="cliente" value="<?php echo $cliente; ?>">
             </div>
           <input type="submit" class="btn btn-secondary btn-lg btn-block" value="Agregar" ></form>
-           <form  name="procesapago" action="ventafinal.php?id=<?php echo $cliente ?>" method="post" autocomplete="off" onKeyPress="return anular(event)" >
+           <form  name="procesapago" action="ventafinalCajero.php?id=<?php echo $cliente ?>" method="post" autocomplete="off" onKeyPress="return anular(event)" >
       <br>
           <button id="btnImprimir" type="submit" class="btn btn-danger btn-lg btn-block" >Realizar cobro</button></a>
 		  </form>

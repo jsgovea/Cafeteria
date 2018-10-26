@@ -12,7 +12,7 @@
 		<caption>
 			 
 		</caption>
-			<tr>
+			<tr class="danger">
 				<td>Folio</td>
 				<td>Descripcion</td>
 				<td>Cantidad</td>
@@ -22,7 +22,7 @@
 
 			<?php 
 
-					$sql="select * from kiosco where status=0 order by folio desc";
+					$sql="select * from kiosco where status=0 order by folio asc";
 
 				$result=mysqli_query($conexion,$sql);	
 				while($ver=mysqli_fetch_row($result)){ 
