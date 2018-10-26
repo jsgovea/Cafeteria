@@ -1,0 +1,237 @@
+<?php
+  require_once('includes/funciones.php');
+
+
+function HandleXmlError($errno, $errstr, $errfile, $errline){
+     if ($errno==E_WARNING && (substr_count($errstr,"DOMDocument::loadXML()")>0)){
+         throw new DOMException($errstr);
+     }
+     else 
+        return false;
+}
+ 
+function XmlLoader($strXml){
+     set_error_handler('HandleXmlError');
+     $dom = new DOMDocument();
+     $dom->loadXML($strXml);    
+     restore_error_handler();
+     return $dom;
+}
+ 
+function LeerArchivoXMLCompleto($url){
+   //abrimos el fichero, puede ser de texto o una URL
+   $error = "";   
+      $fichero_url = fopen ($url, "r");
+      $texto = "";
+      //bucle para ir recibiendo todo el contenido del fichero en bloques de 1024 bytes
+      while ($trozo = fgets($fichero_url, 1024)){
+          $texto .= $trozo;
+      }
+      $nPos = strpos($texto,"<?xml");   // Inicio de XML
+      // Eliminar caracteres de Relleno en documentos con formato extendido.
+      $nPos = ($nPos>-1)? $nPos : 1;
+      $texto = substr($texto,$nPos);
+
+      return $texto;
+} 
+/**********************************************************************/
+
+function GrabaArchivoXMLCompleto($url,$xmlDoc){
+   //abrimos el fichero, puede ser de texto o una URL
+     $dom = new DOMDocument();
+     $dom->loadXML($strXml);    
+     restore_error_handler();
+     return $dom;
+}
+   
+/**********************************************************************/
+
+
+function encode($sMensaje,$toCrypt=true){
+	$sNewMensaje = $sMensaje;
+	if($toCrypt)   $sNewMensaje = str_replace( array(">", "<", "\"", "&"),               array("&gt;", "&lt;", "&quot;", "&amp;"), $sNewMensaje); 
+	else    	   $sNewMensaje = str_replace( array("&gt;", "&lt;", "&quot;", "&amp;"), array(">", "<", "\"", "&"),                $sNewMensaje); 
+    return $sNewMensaje;
+}
+
+
+function GetXMLElement($oXMLDoc,$sPath,$NameElement){
+$sResult = "";
+   $Node    = $oXMLDoc->xpath($sPath);
+   if( isset($Node[0]) ){
+		 if( isset($Node[0]->$NameElement) )
+			   	   $sResult =  $Node[0]->$NameElement;
+   }
+   return $sResult;
+}
+
+
+function GetXMLAttribute($oXMLDoc,$sPath,$attribute){
+	   $sResult = "";
+	   $Node    = $oXMLDoc->xpath($sPath);
+	   if(! is_object($Node)){
+	      $objeto  = $Node[0];
+	      $sResult = findXMLAttribute($objeto, $attribute);
+	   }
+	   else{
+		   $sResult =  GetXMLElementByName($oXMLDoc, "<$attribute>","</$attribute>");
+	   }
+ 	   return $sResult;
+   }
+
+
+   function findXMLAttribute($object, $attribute) { 
+   $sSalida="";
+     foreach($object->attributes() as $a => $b) { 
+        if ($a == $attribute)   $sSalida = $b; 
+     } 
+     return $sSalida;
+   } 
+
+
+   function TrimXML($sXMLFile="",$isFile=false){
+      $asXML = $sXMLFile;
+	  if($isFile)  $asXML = LeerArchivoXMLCompleto($sXMLFile);
+	  if($asXML!==""){
+	     $dom    = new DOMDocument('1.0',"UTF-8"); 
+         $dom->preserveWhiteSpace = false; 
+         $dom->formatOutput = true; 
+         $asXML = $dom->loadXML($asXML); 
+	  }
+     return $asXML;
+   }
+
+
+function GetXMLElementByName ($xml, $start, $end="") { 
+    global $pos; 
+	if($end===""){
+		$end   = "</$start>";
+		$start = "<$start>";
+	}
+    $startpos = strpos($xml, $start); 
+    if ($startpos === false) { 
+        return false; 
+    } 
+    $endpos = strpos($xml, $end); 
+    $endpos = $endpos+strlen($end);    
+    $pos = $endpos; 
+    $endpos = $endpos-$startpos; 
+    $endpos = $endpos - strlen($end); 
+    $tag = substr ($xml, $startpos, $endpos); 
+    $tag = substr ($tag, strlen($start)); 
+    return $tag; 
+} 
+
+
+function getTextFromNode($Node, $Text = "") { 
+    if ($Node->tagName == null) 
+        return $Text.$Node->textContent; 
+
+    $Node = $Node->firstChild; 
+    if ($Node != null) 
+        $Text = getTextFromNode($Node, $Text); 
+
+    while($Node->nextSibling != null) { 
+        $Text = getTextFromNode($Node->nextSibling, $Text); 
+        $Node = $Node->nextSibling; 
+    } 
+    return $Text; 
+} 
+
+function ChangeXMLNameSpace($sXML,$cNameSpaceFieldFrom,$cNameSpaceFieldTo){
+$sResult;
+    $sResult = str_replace($cNameSpaceFieldFrom, $cNameSpaceFieldTo, $sXML);
+ 	return( $sResult);
+}
+
+class SimpleXMLExtend extends SimpleXMLElement{
+
+ public function addCData($nodename,$cdata_text){
+    $node = $this->addChild($nodename); //Added a nodename to create inside the function
+    $node = dom_import_simplexml($node);
+    $no = $node->ownerDocument;
+    $node->appendChild($no->createCDATASection($cdata_text));
+ }
+ 
+ public function removeNodeByAttrib($nodename,$attribute,$value){
+    foreach ($this->xpath($nodename) as $key => $node) {
+       foreach($node->attributes() as $attrib => $val){
+          if ($attrib == $attribute && $val == $value) {
+             $oNode = dom_import_simplexml($node);
+          }
+       }
+    }
+    $oNode->parentNode->removeChild($oNode);
+  }
+
+ public function SetNodeAttribute($nodename,$attribute,$value){
+    foreach ($this->xpath($nodename) as $key => $node)
+       foreach($node->attributes() as $attrib )
+          if ($attrib == $attribute )
+			     $node->attributes()->$attribute = $value;
+  }
+
+ public function SetNodeElement($nodename,$elementname,$value){
+   foreach ($this->xpath($nodename) as $key => $node){
+   	 if(isset($node->$elementname)){
+          $node->$elementname = "$value";
+          break;
+   	 }
+    }	
+ }
+
+ public function removeNodeAttrib($nodename){
+    $oNode = NULL;	
+    foreach ($this->xpath($nodename) as $key => $node) {
+       $oNode = dom_import_simplexml($node);
+    }
+	if($oNode !== NULL){
+		$parentNODE = $oNode->parentNode;
+		$parentNODE->removeChild($oNode);
+	}
+  }
+  
+  public function removeNodesByName($nodename){
+    $oNode = NULL;
+    foreach ($this->xpath($nodename) as $key => $node){
+      $oNode = dom_import_simplexml($node);
+  	  if($oNode !== NULL){
+		 $parentNODE = $oNode->parentNode;
+		 $parentNODE->removeChild($oNode);
+	  }
+	}
+  }
+  
+  public function SaveTrimXML($sFileNameXML=""){
+	  $dom = new DOMDocument('1.0',"utf-8"); 
+     $dom->preserveWhiteSpace = false; 
+     $dom->formatOutput = true; 
+     $dom->loadXML($this->asXML()); 
+	  $xmlnew = $dom->saveXML();
+	  if($sFileNameXML!=="")
+         $dom->save($sFileNameXML); 
+	  return $xmlnew;
+   }
+   
+} //class
+
+function loadXMLFile($sFilename, $sCharset = 'UTF-8'){
+     if (floatval(phpversion()) >= 4.3) {
+         $sData = file_get_contents($sFilename);
+     } else {
+         if (!file_exists($sFilename)) return -3;
+         $rHandle = fopen($sFilename, 'r');
+         if (!$rHandle) return -2;
+         $sData = '';
+         while(!feof($rHandle))
+             $sData .= fread($rHandle, filesize($sFilename));
+         fclose($rHandle);
+     }
+     if ($sEncoding = mb_detect_encoding($sData, 'auto', true) != $sCharset)
+         $sData = mb_convert_encoding($sData, $sCharset, $sEncoding);
+     return $sData;
+ }
+
+	
+?> 
+

@@ -1,0 +1,51 @@
+<?php
+
+// Constantes
+	# Servidor de base de datos        REMOTO
+	
+	define ("MYSQL_SERVICES",          "192.168.2.22");
+	define ("MYSQL_SERVICESUSER",      "root");
+	define ("MYSQL_SERVICESPASSWORD",  "RootMySQL");
+	define ("MYSQL_SERVICESDB",        "mytek");
+
+	define ("MSSQL_DBSERVER",          "192.168.2.4");
+	define ("MSSQL_DBUSER",            "sa");
+	define ("MSSQL_DBPASSWORD",        "123456");
+	define ("MSSQL_DBACCOUNTING",      "COMPAC");
+	define ("MSSQL_DBMTS2002",         "SQLEXPRESS");
+	
+	define ("MSSQL_DBACC_2012",        "ctMERRY_2012");
+	define ("MSSQL_DBMTS2002DATA",     "MT2002");
+	define ("MSSQL_DBMTS2002EMP",      "MERRYEMP");
+	
+	define ("IB_DBSERVER",             "192.168.2.50");
+	define ("IB_DBEMPRESAS",           "D:\\Program Files\\Grupo Tress\\Datos\\Comparte.GDB");
+	define ("IB_DBMERRY",              "D:\\Program Files\\Grupo Tress\\Datos\\Datos.GDB");
+	
+	define("IB_DBHOST",                "192.168.2.50:D:\\Program Files\\Grupo Tress\\Datos\\Comparte.GDB");
+	define("IB_DBHOSTM",               "192.168.2.50:D:\\Program Files\\Grupo Tress\\Datos\\Datos.GDB");
+	
+	# Usuario de base de datos
+	define("IB_DBUSER",                "sysdba");
+	
+	# Password de base de datos
+	define("IB_DBPASSWORD",            "masterkey");
+	
+	# Parametros del acceso FTP....
+	define("PATH_FTP",                 "ftpsite");
+		
+	# Parametros del acceso FTP....
+ 	define("FTP_SERVER",               "nsa-mx.dyndns.info");
+   define("FTP_USER",                 "fk");
+ 	define("FTP_PASSWORD",             "W3lc0m301");
+
+	define("FTP_SERVER_2",             "192.168.2.22");
+   define("FTP_USER_2",               "tty001");
+	define("FTP_PASSWORD_2",           "tty1024");
+	
+	define("PDOX_SERVER",              "192.168.2.2");
+   define("PDOX_USR",                 "alonzo");
+	define("PDOX_PASSWORD",            "chemiluz");
+   define("PDOX_NETCONTROL",          "SCSI_VOL:\\PARADOX\\PDOX45")
+
+?>
