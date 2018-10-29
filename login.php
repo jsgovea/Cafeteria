@@ -28,7 +28,7 @@
 
       <!-- Remind Passowrd -->
       <div id="formFooter">
-        <a class="underlineHover" href="#">¿Olvidaste la contraseña?</a>
+          <!-- <a class="underlineHover" href="#">¿Olvidaste la contraseña?</a> -->
       </div>
     </div>
   </div>
