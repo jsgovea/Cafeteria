@@ -1,0 +1,19 @@
+DELIMITER $$
+CREATE PROCEDURE totalticket3(
+folio int
+)
+BEGIN
+select   sum(total) from ventas where id_venta=folio;
+END$$
+DELIMITER ;
+
+call totalticket3 (1);
+
+DELIMITER $$
+CREATE PROCEDURE totalticket4(
+folio int
+)
+BEGIN
+select   *  from ventas where id_venta=folio;
+END$$
+DELIMITER ;
